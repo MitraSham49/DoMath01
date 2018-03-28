@@ -3,51 +3,76 @@ package com.example.demo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomeController {
-    @RequestMapping("/runme")
-    public String loadFormPage(Model model){
+    @RequestMapping("/")
+    public String loadFormPage(@RequestParam("input") String input, Model model){
         int a, b, c, d, e;
-        double x, y, z;
-        String one, two, red, blue;
-        String output;
+        double  x, y, z;
+        String one, two, red, blue, green;
+        StringBuilder output= new StringBuilder();
 
         a = 5;
         b = 10;
         c = a + b;
-        output = dosomething();
-        output = output + "<br/>" + "a is " + a + ", b is " + b;
-        System.out.println( "a + b is " + c );
+        output.append(input);
+        output.append("<br/>");
+        output.append(dosomething());
+
+        output.append("<br/>");
+        output.append("a is " + a + ", b is " + b);
+        output.append("<br/>");
+        output.append("a + b is " + c);
+
         d = a - b;
-        System.out.println( "a - b is " + d );
+        output.append("<br/>");
+        output.append("a - b is " + d );
         e = a * b;
-        System.out.println( "a * b is " + e );
+        output.append("<br/>");
+        output.append("a * b is" + e);
         e = a / b;
-        System.out.println( "a / b is " + e );
+        output.append("<br/>");
+        output.append("a / b is " + e);
         e = b / a;
-        System.out.println( "b / a is " + e );
+        output.append("<br/>");
+        output.append( "b / a is " + e );
         e = a % b;
-        System.out.println( "a % b is " + e );
+        output.append("<br/>");
+        output.append( "a % b is " + e );
         e = b % a;
-        System.out.println( "b % a is " + e );
+        output.append("<br/>");
+        output.append( "b % a is " + e );
 
         x = 1.5;
-        System.out.println( "x is " + x );
+        output.append("<br/>");
+        output.append( "x is " + x );
         y = x * x;
-        System.out.println( "x * x is " + y );
+        output.append("<br/>");
+        output.append( "x * x is " + y );
         z = b / 3;
-        System.out.println( "b / 3 is " + z );
-        System.out.println();
+        output.append("<br/>");
+        output.append( "b / 3 is " + z );
+        output.append("<br/>");
+        //output.append();
 
         one = "one";
         two = "two";
         red = "red";
         blue = "blue";
-        System.out.print( one + " fish " + two + " fish ");
-        System.out.println(red + " fish " + blue + " fish");
-        System.out.printf("%s fish %s fish %s fish %s fish", one, two, red, blue);
-        model.addAttribute("output",output);
+        green = "green";
+        output.append("<br/>");
+        output.append("Green is" +green);
+        output.append("<br/>");
+        output.append( one + " fish " + two + " fish ");
+        output.append("<br/>");
+        output.append(red + " fish " + blue + " fish");
+        output.append("<br/>");
+        output.append(String.format("%s fish %s fish %s fish %s fish", one, two, red, blue));
+        output.append("<br/>");
+        model.addAttribute("output" ,output);
+       //send index.html back to the browser
          return"index";
     }
     private  String dosomething(){
